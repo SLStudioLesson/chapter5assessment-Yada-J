@@ -130,7 +130,7 @@ public class TaskDataAccess {
 
             String line;
             for (Task task : tasks) {
-                // 編集対象のLibraryなら、updateLibraryの情報を書き込む
+                // 編集対象のTaskなら、updateTaskの情報を書き込む
                 if (task.getCode() == updateTask.getCode()) {
                     line = createLine(updateTask);
                 } else {

@@ -216,8 +216,8 @@ public class TaskUI {
                     continue;
                 }
 
-                System.out.print("どのステータスに変更するか選択してください。");
-                System.out.print("1. 着手中, 2. 完了");
+                System.out.println("どのステータスに変更するか選択してください。");
+                System.out.println("1. 着手中, 2. 完了");
                 System.out.print("選択肢：");
                 String status = reader.readLine();
                 if (!isNumeric(status)) {
@@ -225,7 +225,7 @@ public class TaskUI {
                     System.out.println();
                     continue;
                 }
-                if (!status.equals("1") || status.equals("2")) {
+                if (!status.equals("1") && !status.equals("2")) {
                     System.out.println("ステータスは1・2の中から選択してください");
                     System.out.println();
                     continue;

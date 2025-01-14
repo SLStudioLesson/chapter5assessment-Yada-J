@@ -110,13 +110,30 @@ public class TaskLogic {
                             User loginUser) throws AppException {
         Task task = taskDataAccess.findByCode(code);
 
+        
         if (task == null) {
             throw new AppException("存在するタスクコードを入力してください");
         }
-        if (library.getRentUserCode() != 0) {
+        
+        int currentStatus = task.getStatus();
+        
+        //tasks.csvに存在するタスクのステータスが、変更後のステータスの1つ前じゃない場合
+        if ((currentStatus == 0 && status != 1) ||
+            (currentStatus == 1 && status != 2) ||
+            (currentStatus == 2 && status != currentStatus)) {
             throw new AppException("ステータスは、前のステータスより1つ先のもののみを選択してください");
-        }
+            }
+        //tasks.csvの該当タスクのステータスを変更後のステータスに更新する
+        task.setStatus(status);
+        taskDataAccess.save(task);
 
+
+        //Logs.csvにデータを1件作成する
+        Log log = new Log(code, loginUser.getCode(), status, LocalDate.now());
+        logDataAccess.save(log);
+
+        System.out.println("ステータスの変更が完了しました。");
+    
     }
 
     /**
