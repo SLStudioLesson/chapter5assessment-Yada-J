@@ -125,7 +125,7 @@ public class TaskLogic {
             }
         //tasks.csvの該当タスクのステータスを変更後のステータスに更新する
         task.setStatus(status);
-        taskDataAccess.save(task);
+        taskDataAccess.update(task);
 
 
         //Logs.csvにデータを1件作成する
